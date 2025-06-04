@@ -1,0 +1,59 @@
+﻿@model IEnumerable<caominhhuy.Models.Product>
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<caominhhuy.Models.ApplicationUser> SignInManager
+@inject UserManager<caominhhuy.Models.ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var isAdmin = User.Identity != null && User.IsInRole("Admin");
+}
+
+<h2 class="mb-4 text-primary">Danh sách sản phẩm</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Không có sản phẩm nào.</div>
+}
+else
+{
+    <table class="table table-striped table-hover table-bordered align-middle">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Mô tả</th>
+                <th>Danh mục</th>
+                <th style="width: 180px;">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Price.ToString("N0") đ</td>
+                    <td>@(product.Description?.Length > 50 ? product.Description.Substring(0, 50) + "..." : product.Description)</td>
+                    <td>@(product.Category?.Name ?? "Chưa phân loại")</td>
+                    <td class="text-center">
+                        <a asp-action="Display" asp-route-id="@product.Id" class="btn btn-info btn-sm me-1">
+                            <i class="bi bi-eye"></i> Xem
+                        </a>
+
+                        @if (isAdmin)
+                        {
+                            <a asp-action="Update" asp-route-id="@product.Id" class="btn btn-warning btn-sm me-1">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger btn-sm"
+                               onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                <i class="bi bi-trash"></i> Xóa
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

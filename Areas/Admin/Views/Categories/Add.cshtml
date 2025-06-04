@@ -1,0 +1,28 @@
+﻿@model caominhhuy.Models.Category
+
+@{
+    ViewData["Title"] = "Thêm danh mục";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-primary mb-4">@ViewData["Title"]</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form asp-area="Admin" asp-controller="Categories" asp-action="Add" method="post">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" placeholder="Nhập tên danh mục..." />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-save"></i> Lưu
+            </button>
+
+            <a asp-area="Admin" asp-controller="Categories" asp-action="Index" class="btn btn-secondary ms-2">
+                <i class="bi bi-arrow-left"></i> Quay lại
+            </a>
+        </form>
+    </div>
+</div>
