@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -23,8 +24,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
 });
 
-builder.Services.AddRazorPages();
-
+// Repositories DI
 builder.Services.AddScoped<IProductRepository, EFProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, EFCategoryRepository>();
 
@@ -47,14 +47,14 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-// Route cho các Area (ví dụ Admin)
+// Route cho các Area (bắt buộc phải có để Razor tìm thấy /Admin/... )
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
-// Route mặc định cho controller Home/Index
+// Route mặc định: vào Admin/Product/Index
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=PublicProduct}/{action=Index}/{id?}");
+    pattern: "{area=Admin}/{controller=Product}/{action=Index}/{id?}");
 
 app.Run();

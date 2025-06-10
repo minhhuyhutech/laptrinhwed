@@ -319,3 +319,4 @@ D:\caominhhuy\bin\Debug\net8.0\caominhhuy.pdb
 D:\caominhhuy\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\caominhhuy\obj\Debug\net8.0\caominhhuy.genruntimeconfig.cache
 D:\caominhhuy\obj\Debug\net8.0\ref\caominhhuy.dll
+D:\caominhhuy\obj\Debug\net8.0\caominhhuy.sourcelink.json
