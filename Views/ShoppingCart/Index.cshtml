@@ -1,0 +1,50 @@
+﻿@model ShoppingCart
+
+@{
+    ViewData["Title"] = "Your Cart";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">🛒 Your Shopping Cart</h2>
+
+    @if (Model.Items == null || !Model.Items.Any())
+    {
+        <div class="alert alert-info">Your cart is currently empty.</div>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col" class="text-center">Quantity</th>
+                    <th scope="col" class="text-end">Price</th>
+                    <th scope="col" class="text-end">Total</th>
+                    <th scope="col" class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td class="text-center">@item.Quantity</td>
+                        <td class="text-end">@item.Price.ToString("C")</td>
+                        <td class="text-end">@((item.Price * item.Quantity).ToString("C"))</td>
+                        <td class="text-center">
+                            <a asp-action="RemoveFromCart" asp-route-productId="@item.ProductId" class="btn btn-sm btn-danger">
+                                Remove
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="text-end mt-4">
+            <a asp-action="Checkout" class="btn btn-success btn-lg">
+                Proceed to Checkout
+            </a>
+        </div>
+    }
+</div>

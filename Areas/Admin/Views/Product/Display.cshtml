@@ -1,0 +1,26 @@
+﻿@model caominhhuy.Models.Product
+
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="bg-light p-4 rounded shadow">
+        <h2 class="text-primary">@Model.Name</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <img src="@Model.ImageUrl" alt="Image" class="img-fluid border rounded" style="max-height: 300px;" />
+            </div>
+            <div class="col-md-6">
+                <p><strong>Giá:</strong> <span class="text-success">@Model.Price.ToString("N0") đ</span></p>
+                <p><strong>Mô tả:</strong> @Model.Description</p>
+                <p><strong>Danh mục:</strong> @Model.Category?.Name</p>
+
+                <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="btn btn-primary mt-3">
+                    <i class="bi bi-arrow-left-circle"></i> Quay lại
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

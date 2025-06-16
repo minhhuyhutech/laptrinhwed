@@ -1,0 +1,20 @@
+﻿@model caominhhuy.Models.Product
+
+@{
+    ViewData["Title"] = "Xác nhận xóa sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-danger">Bạn có chắc chắn muốn xóa sản phẩm này?</h2>
+
+<div class="alert alert-warning">
+    <strong>@Model.Name</strong><br />
+    Giá: @Model.Price.ToString("N0") đ<br />
+    Mô tả: @Model.Description
+</div>
+
+<form asp-area="Admin" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

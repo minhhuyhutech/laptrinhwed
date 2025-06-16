@@ -1,0 +1,32 @@
+﻿@model caominhhuy.Models.Category
+
+@{
+    ViewData["Title"] = "Xóa danh mục";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-danger mb-3">@ViewData["Title"]</h2>
+
+<div class="alert alert-warning">
+    <strong>Bạn có chắc chắn muốn xóa danh mục này không?</strong>
+</div>
+
+<div class="mb-4">
+    <dl class="row">
+        <dt class="col-sm-3">ID</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+
+        <dt class="col-sm-3">Tên danh mục</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
+    </dl>
+</div>
+
+<form asp-area="Admin" asp-controller="Categories" asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">
+        <i class="bi bi-trash"></i> Xóa
+    </button>
+    <a asp-area="Admin" asp-controller="Categories" asp-action="Index" class="btn btn-secondary ms-2">
+        <i class="bi bi-arrow-left"></i> Hủy
+    </a>
+</form>
